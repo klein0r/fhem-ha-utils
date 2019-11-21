@@ -279,7 +279,7 @@ sub haDiffTime($$) {
     return sprintf("%02d:%02d:%02d", $diff / 3600, ($diff / 60) % 60, $diff % 60);
 }
 
-sub customLog($$$)
+sub haCustomLog($$$)
 {
     my ($filename, $loglevel, $text) = @_;
 
