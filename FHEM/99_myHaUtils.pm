@@ -1,5 +1,5 @@
 ##############################################
-# $Id: 99_myHaUtils.pm 7570 2019-11-18 18:31:44Z matthiaskleine $
+# $Id: 99_myHaUtils.pm 7570 2020-11-27 10:21:44Z matthiaskleine $
 #
 
 package main;
@@ -146,6 +146,22 @@ sub haHasReadingWithValue($$)
 
     foreach my $r (haGetAllDeviceReadings($d)) {
         return $r if (ReadingsVal($d, $r, undef)) eq $v;
+    }
+
+    return undef;
+}
+
+# Checks if a reading which contains a given value exists (independent of the name)
+# and returns the name of the first matching reading
+# example:
+#           {haHasReadingContainsValue("FritzBox", "raspberrypi-fhem")} => mac_B8_27_EB_BF_D9_B4
+
+sub haHasReadingContainsValue($$)
+{
+    my ($d, $v) = @_;
+
+    foreach my $r (haGetAllDeviceReadings($d)) {
+        return $r if (ReadingsVal($d, $r, undef)) =~ $v;
     }
 
     return undef;
